@@ -3,13 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Product;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
@@ -21,5 +20,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+        $this->call(ProductSeeder::class);
+
+        // Sync the seeded data to JSON
+        $products = Product::orderBy('created_at', 'asc')->get();
+        Storage::disk('local')->put('products.json', $products->toJson(JSON_PRETTY_PRINT));
     }
 }
