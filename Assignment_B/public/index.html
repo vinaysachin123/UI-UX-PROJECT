@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Inventory Dashboard - Assignment B</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #f4f7f6; --header: #2c3e50; --accent: #3498db; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { color: var(--header); margin-bottom: 2rem; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .supplier-block { margin-bottom: 30px; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+        .supplier-header { background: #f9f9f9; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .supplier-name { font-weight: 700; font-size: 1.2rem; color: var(--header); }
+        .supplier-value { font-weight: 700; color: var(--accent); }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; background: #fff; border-bottom: 1px solid #eee; padding: 12px 20px; font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase; }
+        td { padding: 12px 20px; border-bottom: 1px solid #f9f9f9; }
+        .empty { text-align: center; color: #999; padding: 40px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Supplier Inventory Valuation Report</h1>
+        <div id="dashboard">Loading report data...</div>
+    </div>
+
+    <script>
+        async function loadReport() {
+            try {
+                const res = await fetch('/api/inventory');
+                const data = await res.json();
+                const container = document.getElementById('dashboard');
+                container.innerHTML = '';
+
+                if (data.length === 0) {
+                    container.innerHTML = '<div class="empty">No inventory data available in the database.</div>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    const block = document.createElement('div');
+                    block.className = 'supplier-block';
+                    
+                    let tableRows = item.products.map(p => `
+                        <tr>
+                            <td>${p.product_name}</td>
+                            <td>${p.quantity} units</td>
+                            <td>$${p.price.toFixed(2)}</td>
+                            <td>$${p.item_value.toFixed(2)}</td>
+                        </tr>
+                    `).join('');
+
+                    block.innerHTML = `
+                        <div class="supplier-header">
+                            <div class="supplier-name">${item.supplier_name} (${item.supplier_city})</div>
+                            <div class="supplier-value">Total Value: $${item.total_inventory_value.toFixed(2)}</div>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>${tableRows}</tbody>
+                        </table>
+                    `;
+                    container.appendChild(block);
+                });
+            } catch (err) {
+                document.getElementById('dashboard').innerHTML = 'Error loading report.';
+            }
+        }
+        loadReport();
+    </script>
+</body>
+</html>

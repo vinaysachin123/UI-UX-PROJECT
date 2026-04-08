@@ -1,0 +1,17 @@
+[
+  { "id": 1, "product_name": "Premium Ergonomic Chair", "category": "Furniture", "price": 199.99, "stock": 45 },
+  { "id": 2, "product_name": "Wireless Mechanical Keyboard", "category": "Electronics", "price": 120.00, "stock": 100 },
+  { "id": 3, "product_name": "4K Ultra HD Monitor - 27 inch", "category": "Electronics", "price": 299.99, "stock": 30 },
+  { "id": 4, "product_name": "Noise Cancelling Headphones", "category": "Electronics", "price": 150.50, "stock": 60 },
+  { "id": 5, "product_name": "Standing Desk - Motorized", "category": "Furniture", "price": 350.00, "stock": 25 },
+  { "id": 6, "product_name": "USB-C Docking Station", "category": "Electronics", "price": 85.00, "stock": 0 },
+  { "id": 7, "product_name": "Leather Executive Chair", "category": "Furniture", "price": 250.00, "stock": 10 },
+  { "id": 8, "product_name": "Bluetooth Mouse v2", "category": "Electronics", "price": 45.00, "stock": 200 },
+  { "id": 9, "product_name": "Steel Filing Cabinet", "category": "Office Supplies", "price": 75.00, "stock": 15 },
+  { "id": 10, "product_name": "Whiteboard 60x40", "category": "Office Supplies", "price": 40.00, "stock": 50 },
+  { "id": 11, "product_name": "Gel Mousepad", "category": "Accessories", "price": 12.99, "stock": 150 },
+  { "id": 12, "product_name": "Monitor Arm Stand", "category": "Accessories", "price": 35.00, "stock": 80 },
+  { "id": 13, "product_name": "Acoustic Desk Dividers", "category": "Furniture", "price": 60.00, "stock": 40 },
+  { "id": 14, "product_name": "Desk Lamp LED", "category": "Accessories", "price": 25.00, "stock": 110 },
+  { "id": 15, "product_name": "Webcam 1080p HD", "category": "Electronics", "price": 55.49, "stock": 0 }
+]
